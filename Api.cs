@@ -31,14 +31,15 @@ namespace Challonge_API {
         /*
          * Returns the content of a request
          */
-        public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> body) {
+        public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> body = null) {
             FormUrlEncodedContent content = new FormUrlEncodedContent(body);
-            string fullpath = "https://" + CHALLONGE_API_URL + "/" + path;
+            // https://username:api-key@api.challonge.com/v1/...
+            string fullpath = "https://" + credentials.Username + ":" + credentials.Token + "@" + CHALLONGE_API_URL + "/" + path;
 
             HttpResponseMessage response = null;
             switch (method) {
                 case Methods.GET:
-                    response = await client.GetAsync(fullpath);
+                    response = await client.GetAsync(fullpath + "?" + content.ToString());
                     break;
                 case Methods.POST:
                     response = await client.PostAsync(fullpath, content);
