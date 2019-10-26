@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challonge API", "Challonge API.csproj", "{674AC80C-C2A5-415B-BB2A-5537693D5FA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B144E47F-CDE8-4976-94DD-2ABAF9DE365C}
+	EndGlobalSection
+EndGlobal
