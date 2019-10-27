@@ -48,5 +48,17 @@ namespace API_test {
 
             Assert.IsNotNull(result["result"][0]);
         }
+
+        [TestMethod]
+        public void DoesATournamentsQuery() {
+            Dictionary<string, string> param = null;
+            Task<JObject> TaskQuery = Task.Run(() => Tournaments.Index(api, param));
+
+            TaskQuery.Wait();
+
+            JObject result = TaskQuery.Result;
+
+            Assert.IsNotNull(result["result"][0]);
+        }
     }
 }
