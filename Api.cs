@@ -80,7 +80,7 @@ namespace Challonge_API {
         public async Task<JObject> FetchAndParse(Api.Methods method, string path, Dictionary<string, string> body) {
             string responseAsString = await Fetch(method, path, body);
             if (responseAsString[0] == '{') {
-                return JObject.Parse(responseAsString);
+                return new JObject(new JProperty("result", JObject.Parse(responseAsString)));
             }
             else {
                 // The API either returns a {data...} which is a JSon object or a [data...] which is an array
