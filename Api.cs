@@ -6,22 +6,22 @@ using Newtonsoft.Json.Linq;
 
 namespace Challonge_API {
     public class Api {
-        private Credentials credentials;
+        private Credentials credentials = new Credentials();
         private const String CHALLONGE_API_URL = "api.challonge.com/v1";
         private static readonly HttpClient client = new HttpClient();
         public enum Methods {GET, POST, PUT, DELETE}
 
         /*
          * Returns true if the credentials changed, false otherwise.
-         * You may only set the credentials once, this is to protect the data after the first set
          */
         public bool setCredentials(string username, string token) {
-            if (credentials == null) {
-                credentials.Username = username;
-                credentials.Token = token;
-                return true;
-            }
-            return false;
+            credentials.Username = username;
+            credentials.Token = token;
+
+            // Basic Auth
+            String encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(credentials.Username + ":" + credentials.Token));
+            client.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
+            return true;
         }
 
         public Tuple<string, string> getCredentials() {
@@ -32,9 +32,13 @@ namespace Challonge_API {
          * Returns the content of a request
          */
         public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> body = null) {
+            if (!body.ContainsKey("api_key")) {
+                body.Add("api_key", credentials.Token);
+            }
             FormUrlEncodedContent content = new FormUrlEncodedContent(body);
-            // https://username:api-key@api.challonge.com/v1/...
-            string fullpath = "https://" + credentials.Username + ":" + credentials.Token + "@" + CHALLONGE_API_URL + "/" + path;
+
+            // Full Path
+            string fullpath = "https://" + CHALLONGE_API_URL + "/" + path;
 
             HttpResponseMessage response = null;
             switch (method) {
@@ -56,7 +60,7 @@ namespace Challonge_API {
             }
 
             if (response == null) return "";
-            return response.Content.ReadAsStringAsync().ToString();
+            return await response.Content.ReadAsStringAsync();
         }
 
         /*
