@@ -36,16 +36,21 @@ namespace Challonge_API {
          * Returns the content of a request
          */
         public async Task<string> Fetch(Api.Methods method, string path, Dictionary<string, string> parameters = null) {
+            if (parameters == null) {
+                parameters = new Dictionary<string, string>();
+            }
+
             if (!parameters.ContainsKey("api_key")) {
                 parameters.Add("api_key", credentials.Token);
             }
+
             FormUrlEncodedContent content = new FormUrlEncodedContent(parameters);
 
             // Full Path
             string fullpath = "https://" + CHALLONGE_API_URL + "/" + path;
-
-            HttpResponseMessage response = null;
             string query = "";
+
+            HttpResponseMessage response;
             switch (method) {
                 case Methods.GET:
                     foreach (KeyValuePair<string, string> entry in parameters) {
