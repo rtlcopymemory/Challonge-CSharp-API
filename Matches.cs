@@ -18,5 +18,17 @@ namespace Challonge_API {
 
             return await api.FetchAndParse(Api.Methods.GET, path, parameters);
         }
+
+        static async Task<JObject> Update(Api api, string tournament, string matchId, Dictionary<string, string> parameters) {
+            string path = "tournaments/" + tournament + "/matches/" + matchId + ".json";
+
+            return await api.FetchAndParse(Api.Methods.PUT, path, parameters);
+        }
+
+        static async Task<JObject> Reopen(Api api, string tournament, string matchId, Dictionary<string, string> parameters) {
+            string path = "tournaments/" + tournament + "/matches/" + matchId + "/reopen.json";
+
+            return await api.FetchAndParse(Api.Methods.POST, path, parameters);
+        }
     }
 }
