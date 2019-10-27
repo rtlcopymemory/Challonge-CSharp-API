@@ -35,7 +35,7 @@ namespace Challonge_API {
         /*
          * Returns the content of a request
          */
-        public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> parameters = null) {
+        public async Task<string> Fetch(Api.Methods method, string path, Dictionary<string, string> parameters = null) {
             if (!parameters.ContainsKey("api_key")) {
                 parameters.Add("api_key", credentials.Token);
             }
