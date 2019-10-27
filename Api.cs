@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Web;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -31,19 +32,23 @@ namespace Challonge_API {
         /*
          * Returns the content of a request
          */
-        public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> body = null) {
-            if (!body.ContainsKey("api_key")) {
-                body.Add("api_key", credentials.Token);
+        public async Task<String> Fetch(Api.Methods method, string path, Dictionary<string, string> parameters = null) {
+            if (!parameters.ContainsKey("api_key")) {
+                parameters.Add("api_key", credentials.Token);
             }
-            FormUrlEncodedContent content = new FormUrlEncodedContent(body);
+            FormUrlEncodedContent content = new FormUrlEncodedContent(parameters);
 
             // Full Path
             string fullpath = "https://" + CHALLONGE_API_URL + "/" + path;
 
             HttpResponseMessage response = null;
+            string query = "";
             switch (method) {
                 case Methods.GET:
-                    response = await client.GetAsync(fullpath + "?" + content.ToString());
+                    foreach (KeyValuePair<string, string> entry in parameters) {
+                        query += HttpUtility.UrlEncode(entry.Key) + "=" + HttpUtility.UrlEncode(entry.Value) + "&";
+                    }
+                    response = await client.GetAsync(fullpath + "?" + query);
                     break;
                 case Methods.POST:
                     response = await client.PostAsync(fullpath, content);
@@ -52,7 +57,10 @@ namespace Challonge_API {
                     response = await client.PutAsync(fullpath, content);
                     break;
                 case Methods.DELETE:
-                    response = await client.DeleteAsync(fullpath);
+                    foreach (KeyValuePair<string, string> entry in parameters) {
+                        query += HttpUtility.UrlEncode(entry.Key) + "=" + HttpUtility.UrlEncode(entry.Value) + "&";
+                    }
+                    response = await client.DeleteAsync(fullpath + "?" + query);
                     break;
                 default:
                     response = null;
