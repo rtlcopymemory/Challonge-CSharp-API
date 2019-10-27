@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Challonge API", "Challonge API.csproj", "{674AC80C-C2A5-415B-BB2A-5537693D5FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API test", "..\API test\API test.csproj", "{E7E7AD11-FF2E-47F7-BCAA-347992A73BF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API test", "API test\API test.csproj", "{3A927B6A-A880-4263-BA4E-6BC0CA6E104F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{674AC80C-C2A5-415B-BB2A-5537693D5FA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7E7AD11-FF2E-47F7-BCAA-347992A73BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7E7AD11-FF2E-47F7-BCAA-347992A73BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7E7AD11-FF2E-47F7-BCAA-347992A73BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7E7AD11-FF2E-47F7-BCAA-347992A73BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A927B6A-A880-4263-BA4E-6BC0CA6E104F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A927B6A-A880-4263-BA4E-6BC0CA6E104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A927B6A-A880-4263-BA4E-6BC0CA6E104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A927B6A-A880-4263-BA4E-6BC0CA6E104F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
