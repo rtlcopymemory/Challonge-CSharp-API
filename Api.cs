@@ -21,8 +21,11 @@ namespace Challonge_API {
 
             // Basic Auth
             String encoded = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(credentials.Username + ":" + credentials.Token));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
-            return true;
+            if (!client.DefaultRequestHeaders.Contains("Authorization")) {
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
+                return true;
+            }
+            return false;
         }
 
         public Tuple<string, string> getCredentials() {
@@ -76,7 +79,13 @@ namespace Challonge_API {
          */
         public async Task<JObject> FetchAndParse(Api.Methods method, string path, Dictionary<string, string> body) {
             string responseAsString = await Fetch(method, path, body);
-            return JObject.Parse(responseAsString);
+            if (responseAsString[0] == '{') {
+                return JObject.Parse(responseAsString);
+            }
+            else {
+                // The API either returns a {data...} which is a JSon object or a [data...] which is an array
+                return new JObject(new JProperty("result", JArray.Parse(responseAsString)));
+            }
         }
     }
 }
