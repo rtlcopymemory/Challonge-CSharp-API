@@ -84,7 +84,7 @@ namespace Challonge_API {
          */
         public async Task<JObject> FetchAndParse(Api.Methods method, string path, Dictionary<string, string> body) {
             string responseAsString = await Fetch(method, path, body);
-            if (responseAsString[0] == '{') {
+            if (responseAsString.StartsWith("{")) {
                 return new JObject(new JProperty("result", JObject.Parse(responseAsString)));
             }
             else {

@@ -14,6 +14,9 @@ namespace Challonge_API {
 
         static public async Task<JObject> Create(Api api, Dictionary<string, string> parameters) {
             string path = "tournaments.json";
+            if (!parameters.ContainsKey("tournament[name]") || !parameters.ContainsKey("tournament[url]")) {
+                throw new MissingFieldException("Missing either tournament[name] or tournament[url]");
+            }
 
             return await api.FetchAndParse(Api.Methods.POST, path, parameters);
         }

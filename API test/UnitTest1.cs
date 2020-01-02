@@ -27,7 +27,7 @@ namespace API_test {
 
             TaskFetch.Wait();
 
-            string result = "" + TaskFetch.Result;
+            string result = TaskFetch.Result;
 
             Assert.AreNotEqual("", result);
             Assert.IsTrue(result.Contains("tournament"));
@@ -59,6 +59,21 @@ namespace API_test {
             JObject result = TaskQuery.Result;
 
             Assert.IsNotNull(result["result"][0]);
+        }
+
+        [TestMethod]
+        public void DoesAComplexTournamentQuery() {
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            string url = "TEST_API1231232131";
+            param.Add("tournament[name]", "TEST API");
+            param.Add("tournament[url]", url);
+
+            Task<JObject> TaskQuery = Task.Run(() => Tournaments.Create(api, param));
+            TaskQuery.Wait();
+            JObject result = TaskQuery.Result;
+
+            Console.WriteLine(result.ToString());
+            Assert.IsTrue(result.ToString().Contains("\"url\": \"" + url + "\""));
         }
     }
 }
